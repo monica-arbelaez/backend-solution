@@ -13,7 +13,7 @@ public class AnswerDTO {
     @NotBlank
     private String answer;
 
-    private Integer position;
+    private Integer vote;
 
 
     public AnswerDTO() {
@@ -26,12 +26,12 @@ public class AnswerDTO {
         this.answer = answer;
     }
 
-    public Integer getPosition() {
-        return Optional.ofNullable(position).orElse(1);
+    public Integer getVote() {
+        return Optional.ofNullable(vote).orElse(1);
     }
 
-    public void setPosition(Integer position) {
-        this.position = position;
+    public void setVote(Integer vote) {
+        this.vote = vote;
     }
 
 

@@ -10,14 +10,14 @@ public class Answer {
     private String userId;
     private String questionId;
     private String answer;
-    private Integer position;
+    private Integer vote;
 
-    public Integer getPosition() {
-        return position;
+    public Integer getVote() {
+        return vote;
     }
 
-    public void setPosition(Integer position) {
-        this.position = position;
+    public void setVote(Integer vote) {
+        this.vote = vote;
     }
 
     public String getId() {
