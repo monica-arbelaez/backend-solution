@@ -20,7 +20,7 @@ public class DeleteRouter {
                 request ->
                         ServerResponse.ok()
                                 .contentType(MediaType.APPLICATION_JSON)
-                                .body(deleteUseCase.deleteByquestionId(request.pathVariable("id")), QuestionDTO.class)
+                                .body(deleteUseCase.deleteByquestionId(request.pathVariable("id")), Void.class)
                 );
     }
 
