@@ -1,7 +1,9 @@
 package co.com.sofka.questions.mapper;
 
 import co.com.sofka.questions.collections.Answer;
+import co.com.sofka.questions.collections.Question;
 import co.com.sofka.questions.model.AnswerDTO;
+import co.com.sofka.questions.model.QuestionDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -43,5 +45,19 @@ public class AnswerMapper {
 
             return answer;
         };
+    }
+
+    public Function<List<AnswerDTO>, QuestionDTO> fromAnswerToQuestionsDTO(QuestionDTO updateQuestion) {
+        return entity -> {
+            var question = new QuestionDTO();
+            question.setId(updateQuestion.getId());
+            question.setUserId(updateQuestion.getUserId());
+            question.setQuestion(updateQuestion.getQuestion());
+            question.setType(updateQuestion.getType());
+            question.setCategory(updateQuestion.getCategory());
+            question.setAnswers(entity);
+            return question;
+        };
+
     }
 }
