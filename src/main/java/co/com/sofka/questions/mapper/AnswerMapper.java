@@ -50,6 +50,9 @@ public class AnswerMapper {
     public Function<List<AnswerDTO>, QuestionDTO> fromAnswerToQuestionsDTO(QuestionDTO updateQuestion) {
         return entity -> {
             var question = new QuestionDTO();
+            if(entity.isEmpty()){
+                return question;
+            }
             question.setId(updateQuestion.getId());
             question.setUserId(updateQuestion.getUserId());
             question.setQuestion(updateQuestion.getQuestion());

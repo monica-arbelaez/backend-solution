@@ -24,7 +24,7 @@ public class UpdateQuestionCloneAnswerRouter {
                                         .contentType(MediaType.APPLICATION_JSON)
                                         .bodyValue(result)).onErrorResume(error ->{
                                             if(error instanceof IllegalAccessException){
-                                                return ServerResponse.badRequest().bodyValue("usuario no esta");
+                                                return ServerResponse.badRequest().bodyValue(new QuestionDTO("user no es","pregunta", "tipo","categoria"));
                                             }
                                             return ServerResponse.badRequest().build();
                                 })));
