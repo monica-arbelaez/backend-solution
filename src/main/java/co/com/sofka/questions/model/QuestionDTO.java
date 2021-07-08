@@ -18,6 +18,16 @@ public class QuestionDTO {
     private String type;
     @NotBlank
     private String category;
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    private String version;
     private List<AnswerDTO> answers;
 
 

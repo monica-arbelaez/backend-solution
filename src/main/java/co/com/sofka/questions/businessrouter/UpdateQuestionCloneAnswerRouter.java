@@ -1,6 +1,6 @@
 package co.com.sofka.questions.businessrouter;
 
-import co.com.sofka.questions.businessusecase.UpdateQuestionCloneAnswerUseCase;
+import co.com.sofka.questions.businessusecase.VerifyUserQuestionUseCase;
 import co.com.sofka.questions.model.QuestionDTO;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,14 +15,19 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
 @Configuration
 public class UpdateQuestionCloneAnswerRouter {
     @Bean
-    public RouterFunction<ServerResponse> actualizarClonarQuestion(UpdateQuestionCloneAnswerUseCase updateQuestionCloneAnswerUseCase) {
+    public RouterFunction<ServerResponse> actualizarClonarQuestion(VerifyUserQuestionUseCase updateQuestionCloneAnswerUseCase) {
 
         return route(PUT("/modificarclonarquestion").and(accept(MediaType.APPLICATION_JSON)),
                 request -> request.bodyToMono(QuestionDTO.class)
-                        .flatMap(questionDTO -> updateQuestionCloneAnswerUseCase.actualizarClonarPreguntas(questionDTO)
+                        .flatMap(questionDTO -> updateQuestionCloneAnswerUseCase.verificarUsuarioPregunta(questionDTO)
                                 .flatMap(result -> ServerResponse.ok()
                                         .contentType(MediaType.APPLICATION_JSON)
-                                        .bodyValue(result))));
+                                        .bodyValue(result)).onErrorResume(error ->{
+                                            if(error instanceof IllegalAccessException){
+                                                return ServerResponse.badRequest().bodyValue("usuario no esta");
+                                            }
+                                            return ServerResponse.badRequest().build();
+                                })));
 
     }
 

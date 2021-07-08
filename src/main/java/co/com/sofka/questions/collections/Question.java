@@ -12,7 +12,15 @@ public class Question {
     private String question;
     private String type;
     private String category;
+    private String version;
 
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
 
     public String getId() {
         return id;
