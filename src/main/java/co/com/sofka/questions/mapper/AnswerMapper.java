@@ -4,13 +4,15 @@ import co.com.sofka.questions.collections.Answer;
 import co.com.sofka.questions.model.AnswerDTO;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Function;
 
 @Component
 public class AnswerMapper {
-    public Function<AnswerDTO, Answer> fromAnswerDtoToAnswer(String id){
-        return updateAnswer->{
-            var answer=new Answer();
+    public Function<AnswerDTO, Answer> fromAnswerDtoToAnswer(String id) {
+        return updateAnswer -> {
+            var answer = new Answer();
             answer.setId(id);
             answer.setUserId(updateAnswer.getUserId());
             answer.setQuestionId(updateAnswer.getQuestionId());
@@ -21,12 +23,25 @@ public class AnswerMapper {
 
     }
 
-    public Function<Answer,AnswerDTO> fromAnswerToAnswerDTO(){
-        return entity->
+    public Function<Answer, AnswerDTO> fromAnswerToAnswerDTO() {
+        return entity ->
                 new AnswerDTO(
-                        entity.getUserId(),
                         entity.getQuestionId(),
+                        entity.getUserId(),
                         entity.getAnswer()
                 );
+    }
+
+    public Function<Answer, Answer> AnswerClone(String idQuestion) {
+        return cloneAnswer -> {
+                var answer = new Answer();
+                answer.setAnswer(cloneAnswer.getAnswer());
+                answer.setId(null);
+                answer.setQuestionId(idQuestion);
+                answer.setUserId(cloneAnswer.getUserId());
+
+
+            return answer;
+        };
     }
 }
