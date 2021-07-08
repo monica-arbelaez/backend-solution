@@ -14,7 +14,7 @@ import reactor.core.publisher.Mono;
 
 @Service
 @Validated
-public class UpdateQuestionByAnswer {
+public class UpdateQuestionByAnswerUseCase {
 
     private final QuestionRepository questionRepository;
     private final AnswerRepository answerRepository;
@@ -22,14 +22,14 @@ public class UpdateQuestionByAnswer {
     private final AnswerMapper answerMapper;
 
     @Autowired
-    public UpdateQuestionByAnswer(QuestionRepository questionRepository, AnswerRepository answerRepository, QuestionMapper questionMapper, AnswerMapper answerMapper) {
+    public UpdateQuestionByAnswerUseCase(QuestionRepository questionRepository, AnswerRepository answerRepository, QuestionMapper questionMapper, AnswerMapper answerMapper) {
         this.questionRepository = questionRepository;
         this.answerRepository = answerRepository;
         this.questionMapper = questionMapper;
         this.answerMapper = answerMapper;
     }
 
-    public Mono<QuestionDTO> updateQuestion(QuestionDTO questionDTO){
+    public Mono<QuestionDTO> updateQuestionByAnswer(QuestionDTO questionDTO){
         var respuestas = answerRepository.findAllByQuestionId(questionDTO.getId());
         var questions = respuestas.map(answerMapper.fromAnswerToAnswerDTO()).buffer().map(answerMapper.fromAnswerToQuestionsDTO(questionDTO)).ignoreElements();
         var re = questions.flatMap(it-> it.getId().isEmpty()?questionRepository.save(questionMapper.mapperToQuestion(questionDTO.getId()).apply(questionDTO)): questionRepository.save(questionMapper.mapperToQuestion(null).apply(questionDTO)));

@@ -13,9 +13,9 @@ import static org.springframework.web.reactive.function.server.RequestPredicates
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
 @Configuration
-public class UpdateQuestionCloneAnswerRouter {
+public class VerifyUserQuestionRouter {
     @Bean
-    public RouterFunction<ServerResponse> actualizarClonarQuestion(VerifyUserQuestionUseCase updateQuestionCloneAnswerUseCase) {
+    public RouterFunction<ServerResponse>VerifyUserQuestion(VerifyUserQuestionUseCase updateQuestionCloneAnswerUseCase) {
 
         return route(PUT("/modificarclonarquestion").and(accept(MediaType.APPLICATION_JSON)),
                 request -> request.bodyToMono(QuestionDTO.class)
@@ -28,6 +28,7 @@ public class UpdateQuestionCloneAnswerRouter {
                                             }
                                             return ServerResponse.badRequest().build();
                                 })));
+
 
     }
 
