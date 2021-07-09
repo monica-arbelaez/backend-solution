@@ -47,10 +47,15 @@ public class AnswerMapper {
         };
     }
 
-    public Function<List<AnswerDTO>, QuestionDTO> fromAnswerToQuestionsDTO(QuestionDTO updateQuestion) {
+    public Function<Answer, Question> fromAnswerToQuestionsDTO(QuestionDTO updateQuestion) {
         return entity -> {
-            var question = new QuestionDTO();
-            if(entity.isEmpty()){
+            var question = new Question();
+            if(entity.getId() != null){
+                question.setId(null);
+                question.setUserId(updateQuestion.getUserId());
+                question.setQuestion(updateQuestion.getQuestion());
+                question.setType(updateQuestion.getType());
+                question.setCategory(updateQuestion.getCategory());
                 return question;
             }
             question.setId(updateQuestion.getId());
@@ -58,7 +63,6 @@ public class AnswerMapper {
             question.setQuestion(updateQuestion.getQuestion());
             question.setType(updateQuestion.getType());
             question.setCategory(updateQuestion.getCategory());
-            question.setAnswers(entity);
             return question;
         };
 

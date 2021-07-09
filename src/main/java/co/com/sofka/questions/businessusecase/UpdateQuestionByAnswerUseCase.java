@@ -1,6 +1,7 @@
 package co.com.sofka.questions.businessusecase;
 
 
+import co.com.sofka.questions.collections.Answer;
 import co.com.sofka.questions.collections.Question;
 import co.com.sofka.questions.mapper.AnswerMapper;
 import co.com.sofka.questions.mapper.QuestionMapper;
@@ -11,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import reactor.core.publisher.Mono;
+
+import java.util.function.Function;
 
 @Service
 @Validated
@@ -29,11 +32,11 @@ public class UpdateQuestionByAnswerUseCase {
         this.answerMapper = answerMapper;
     }
 
-    public Mono<QuestionDTO> updateQuestionByAnswer(QuestionDTO questionDTO){
-        var respuestas = answerRepository.findAllByQuestionId(questionDTO.getId());
-        var questions = respuestas.map(answerMapper.fromAnswerToAnswerDTO()).buffer().map(answerMapper.fromAnswerToQuestionsDTO(questionDTO)).ignoreElements();
-        var re = questions.flatMap(it-> it.getId().isEmpty()?questionRepository.save(questionMapper.mapperToQuestion(questionDTO.getId()).apply(questionDTO)): questionRepository.save(questionMapper.mapperToQuestion(null).apply(questionDTO)));
-        return  re.map(questionMapper.mapQuestionToDTO());
+    public Mono<QuestionDTO> updateQuestionByAnswer(QuestionDTO questionDTO) {
+        var respuestas = answerRepository.findAllByQuestionId(questionDTO.getId()).next().switchIfEmpty(Mono.just(new Answer()))
+                .map(answerMapper.fromAnswerToQuestionsDTO(questionDTO))
+                .flatMap(questionRepository::save);
+       return respuestas.map(questionMapper.mapQuestionToDTO());
     }
 
 
