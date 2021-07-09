@@ -14,7 +14,7 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
 
 
 @Configuration
-public class UpdateQuestionByAnswer {
+public class UpdateQuestionByAnswerRouter {
 
     @Bean
     public RouterFunction<ServerResponse> updateQuestion(UpdateQuestionByAnswerUseCase updateQuestionByAnswer) {
