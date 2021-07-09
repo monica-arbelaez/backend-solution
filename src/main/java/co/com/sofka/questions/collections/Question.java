@@ -12,14 +12,24 @@ public class Question {
     private String question;
     private String type;
     private String category;
-    private String version;
+    private Integer version = 0;
+    private Boolean modified = false;
 
-    public String getVersion() {
+
+    public Integer getVersion() {
         return version;
     }
 
-    public void setVersion(String version) {
+    public void setVersion(Integer version) {
         this.version = version;
+    }
+
+    public Boolean getModified() {
+        return modified;
+    }
+
+    public void setModified(Boolean modified) {
+        this.modified = modified;
     }
 
     public String getId() {

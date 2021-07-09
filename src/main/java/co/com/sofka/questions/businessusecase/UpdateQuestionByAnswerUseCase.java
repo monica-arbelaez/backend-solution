@@ -35,8 +35,15 @@ public class UpdateQuestionByAnswerUseCase {
     public Mono<QuestionDTO> updateQuestionByAnswer(QuestionDTO questionDTO) {
         var respuestas = answerRepository.findAllByQuestionId(questionDTO.getId()).next().switchIfEmpty(Mono.just(new Answer()))
                 .map(answerMapper.fromAnswerToQuestionsDTO(questionDTO))
-                .flatMap(questionRepository::save);
-       return respuestas.map(questionMapper.mapQuestionToDTO());
+                .flatMap(questionRepository::save).flatMap(this::conteo);
+        return respuestas.map(questionMapper.mapQuestionToDTO());
+    }
+
+    public Mono<Question> conteo(Question question) {
+        return questionRepository.findById(question.getId()).flatMap(response -> {
+            response.setVersion(response.getVersion()+1);
+            return questionRepository.save(response);
+        });
     }
 
 

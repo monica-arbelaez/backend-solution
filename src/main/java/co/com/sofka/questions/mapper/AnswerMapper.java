@@ -56,6 +56,8 @@ public class AnswerMapper {
                 question.setQuestion(updateQuestion.getQuestion());
                 question.setType(updateQuestion.getType());
                 question.setCategory(updateQuestion.getCategory());
+                question.setModified(false);
+                question.setVersion(1);
                 return question;
             }
             question.setId(updateQuestion.getId());
@@ -63,6 +65,8 @@ public class AnswerMapper {
             question.setQuestion(updateQuestion.getQuestion());
             question.setType(updateQuestion.getType());
             question.setCategory(updateQuestion.getCategory());
+            question.setModified(true);
+            question.setVersion(updateQuestion.getVersion());
             return question;
         };
 

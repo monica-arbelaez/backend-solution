@@ -32,19 +32,10 @@ public class QuestionMapper {
                 entity.getUserId(),
                 entity.getQuestion(),
                 entity.getType(),
-                entity.getCategory());
+                entity.getCategory(),
+                entity.getVersion(),
+                entity.getModified());
     }
 
-    public Function<QuestionDTO, Question> mapperToQuestion(){
-        return updateQuestion -> {
-            var question = new Question();
-            question.setId(updateQuestion.getId());
-            question.setUserId(updateQuestion.getUserId());
-            question.setQuestion(updateQuestion.getQuestion());
-            question.setType(updateQuestion.getType());
-            question.setCategory(updateQuestion.getCategory());
-            return question;
-        };
 
-    }
 }

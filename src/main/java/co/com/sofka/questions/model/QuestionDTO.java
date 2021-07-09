@@ -18,17 +18,11 @@ public class QuestionDTO {
     private String type;
     @NotBlank
     private String category;
-
-    public String getVersion() {
-        return version;
-    }
-
-    public void setVersion(String version) {
-        this.version = version;
-    }
-
-    private String version;
+    private Integer version;
+    private Boolean modified;
     private List<AnswerDTO> answers;
+
+
 
 
     public QuestionDTO() {
@@ -50,9 +44,35 @@ public class QuestionDTO {
         this.category = category;
     }
 
+    public QuestionDTO(String id, String userId, String question, String type, String category, Integer version, Boolean modified) {
+        this.id = id;
+        this.userId = userId;
+        this.question = question;
+        this.type = type;
+        this.category = category;
+        this.version = version;
+        this.modified = modified;
+    }
+
     public List<AnswerDTO> getAnswers() {
         this.answers = Optional.ofNullable(answers).orElse(new ArrayList<>());
         return answers;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
+    public Boolean getModified() {
+        return modified;
+    }
+
+    public void setModified(Boolean modified) {
+        this.modified = modified;
     }
 
     public void setAnswers(List<AnswerDTO> answers) {
