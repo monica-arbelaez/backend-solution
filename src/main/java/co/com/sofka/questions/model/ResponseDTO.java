@@ -3,7 +3,7 @@ package co.com.sofka.questions.model;
 public class ResponseDTO {
 
     private String mensaje;
-    private QuestionDTO questionDTO;
+    private Boolean estado;
 
     public String getMensaje() {
         return mensaje;
@@ -13,11 +13,11 @@ public class ResponseDTO {
         this.mensaje = mensaje;
     }
 
-    public QuestionDTO getQuestionDTO() {
-        return questionDTO;
+    public Boolean getEstado() {
+        return estado;
     }
 
-    public void setQuestionDTO(QuestionDTO questionDTO) {
-        this.questionDTO = questionDTO;
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
     }
 }
