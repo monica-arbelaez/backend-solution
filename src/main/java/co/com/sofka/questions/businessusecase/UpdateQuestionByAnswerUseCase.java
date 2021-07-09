@@ -44,7 +44,7 @@ public class UpdateQuestionByAnswerUseCase {
         return respuestas.map(questionMapper.mapQuestionToDTO());
     }
 
-    public Mono<Question> conteo(Question question) {
+    private Mono<Question> conteo(Question question) {
         return questionRepository.findById(question.getId()).flatMap(response -> {
             response.setVersion(response.getVersion() + 1);
             response.setModified(true);
