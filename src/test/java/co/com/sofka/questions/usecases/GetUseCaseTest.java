@@ -26,6 +26,7 @@ class GetUseCaseTest {
     @SpyBean
     private GetUseCase getUseCase;
 
+
     @Test
     @DisplayName("consultar preguntas CRUD use case")
     public void getUseCase(){
