@@ -5,6 +5,16 @@ public class ResponseDTO {
     private String mensaje;
     private Boolean estado;
 
+
+    public ResponseDTO(String mensaje, Boolean estado) {
+        this.mensaje = mensaje;
+        this.estado = estado;
+    }
+
+    public ResponseDTO() {
+
+    }
+
     public String getMensaje() {
         return mensaje;
     }

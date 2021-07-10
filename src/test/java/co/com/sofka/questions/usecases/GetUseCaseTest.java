@@ -5,6 +5,7 @@ import co.com.sofka.questions.model.QuestionDTO;
 import co.com.sofka.questions.reposioties.QuestionRepository;
 import co.com.sofka.questions.usecase.GetUseCase;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,6 +27,7 @@ class GetUseCaseTest {
     private GetUseCase getUseCase;
 
     @Test
+    @DisplayName("consultar preguntas CRUD use case")
     public void getUseCase(){
         var questionDTO = new QuestionDTO("14", "1", "quien soy", "OPEN", "DDDD");
         var question = new Question();

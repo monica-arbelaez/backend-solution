@@ -2,6 +2,7 @@ package co.com.sofka.questions.router;
 
 import co.com.sofka.questions.model.QuestionDTO;
 import co.com.sofka.questions.usecase.UpdateUseCase;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
@@ -28,6 +29,7 @@ class ModificarQuestionRouterTest {
     private WebTestClient webTestClient;
 
     @Test
+    @DisplayName("modificar pregunta CRUD router")
     public void modificarQuestionTest(){
         var questionDTO  = new QuestionDTO("14", "1", "quien soy", "OPEN", "DDDD");
         Mockito.when(updateUseCase.modificarQuestion(questionDTO)).thenReturn(Mono.just(questionDTO));

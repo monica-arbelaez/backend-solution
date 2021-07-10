@@ -5,6 +5,7 @@ import co.com.sofka.questions.model.QuestionDTO;
 import co.com.sofka.questions.reposioties.QuestionRepository;
 import co.com.sofka.questions.usecase.UpdateUseCase;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -25,12 +26,14 @@ class UpdateUseCaseTest {
     private UpdateUseCase updateUseCase;
 
     @Test
+    @DisplayName("Editar pregunta CRUD use case")
     public  void editarQuestionTest(){
 
         var question = new QuestionDTO("14", "1", "quien soy", "OPEN", "DDDD");
         var questionResponse = new Question();
         questionResponse.setId("14");
         questionResponse.setUserId("1");
+        questionResponse.setQuestion("esta es una nueva respuesta");
         questionResponse.setType("OPEN");
         questionResponse.setCategory("DDDD");
 

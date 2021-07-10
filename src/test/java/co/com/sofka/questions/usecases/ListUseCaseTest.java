@@ -4,6 +4,7 @@ import co.com.sofka.questions.collections.Question;
 import co.com.sofka.questions.reposioties.QuestionRepository;
 import co.com.sofka.questions.usecase.ListUseCase;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,6 +25,7 @@ class ListUseCaseTest {
     private ListUseCase listUseCase;
 
     @Test
+    @DisplayName("Listar preguntas CRUD use case")
     public void setListUseCase(){
         var question = new Question();
         question.setId("14");

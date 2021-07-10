@@ -2,6 +2,7 @@ package co.com.sofka.questions.businessrouter;
 
 import co.com.sofka.questions.businessusecase.VerifyUserQuestionUseCase;
 import co.com.sofka.questions.model.QuestionDTO;
+import co.com.sofka.questions.model.ResponseDTO;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
@@ -32,18 +34,40 @@ class VerifyUserQuestionRouterTest {
     @Test
     @DisplayName("Test de verificar pregunta de usuario")
     public void verifyUserQuestionRouterTest(){
-        var questionDTO= new QuestionDTO("14", "1", "quien soy", "OPEN", "DDDD");
-        Mockito.when(verifyUserQuestionUseCase.verificarUsuarioPregunta(Mockito.any(QuestionDTO.class)).thenReturn(Mono.just(questionDTO)));
+        var questionDTO= new QuestionDTO("15", "1", "pregunta sin editar", "OPEN", "DDDD");
+        var questionDTO2= new QuestionDTO("14", "1", "pregunta editada", "OPEN", "DDDD");
+       Mockito.when(verifyUserQuestionUseCase.verificarUsuarioPregunta(questionDTO)).thenReturn(Mono.just(questionDTO2));
 
-        webTestClient.get().uri("/verificarusuario")
+        webTestClient.put().uri("/verificarpreguntaporid")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .body(Mono.just(questionDTO),QuestionDTO.class)
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody(QuestionDTO.class)
                 .value(response->{
-                    Assertions.assertThat(response.getUserId()).isEqualTo(questionDTO.getUserId());
+                    Assertions.assertThat(response.getUserId()).isEqualTo("1");
                 });
 
     }
 
+    @Test
+    @DisplayName("Test de verificar erro en identificacion de usuario")
+    public void verifyUserQuestionErrorRouterTest(){
+        var questionDTO= new QuestionDTO("15", "1", "pregunta sin editar", "OPEN", "DDDD");
+        var questionDTO2= new QuestionDTO("14", "1", "pregunta editada", "OPEN", "DDDD");
+        Mockito.when(verifyUserQuestionUseCase.verificarUsuarioPregunta(questionDTO)).thenReturn(Mono.error(new IllegalAccessException()));
 
+        webTestClient.put().uri("/verificarpreguntaporid")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .body(Mono.just(questionDTO),QuestionDTO.class)
+                .exchange()
+                .expectStatus().isBadRequest()
+                .expectBody(ResponseDTO.class)
+                .value(response->{
+                    Assertions.assertThat(response.getMensaje()).isEqualTo("usuario no coincide con el id de la pregunta");
+                });
+
+    }
 }

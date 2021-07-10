@@ -3,6 +3,7 @@ package co.com.sofka.questions.router;
 import co.com.sofka.questions.model.QuestionDTO;
 import co.com.sofka.questions.usecase.ListUseCase;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -28,6 +29,7 @@ class ListQuestionRouterTest {
     private ListUseCase listUseCase;
 
     @Test
+    @DisplayName("listar preguntas CRUD router")
     public void listQuestionTest(){
 
         var questioDTO1 = new QuestionDTO("14", "1", "quien soy", "OPEN", "DDDD");

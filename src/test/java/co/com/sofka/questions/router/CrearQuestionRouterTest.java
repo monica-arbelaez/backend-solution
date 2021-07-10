@@ -3,6 +3,7 @@ package co.com.sofka.questions.router;
 import co.com.sofka.questions.model.QuestionDTO;
 import co.com.sofka.questions.usecase.CreateUseCase;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
@@ -31,6 +32,7 @@ class CrearQuestionRouterTest {
     private WebTestClient webTestClient;
 
     @Test
+    @DisplayName("crear pregunta CRUD router")
     public void crearQuestionTest(){
         var questionDTO = new  QuestionDTO("1", "14", "Cual es el sentido de la vida","OPEN","DDDD");
 

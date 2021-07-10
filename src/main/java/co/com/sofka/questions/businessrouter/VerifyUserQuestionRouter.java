@@ -2,6 +2,7 @@ package co.com.sofka.questions.businessrouter;
 
 import co.com.sofka.questions.businessusecase.VerifyUserQuestionUseCase;
 import co.com.sofka.questions.model.QuestionDTO;
+import co.com.sofka.questions.model.ResponseDTO;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -17,14 +18,14 @@ public class VerifyUserQuestionRouter {
     @Bean
     public RouterFunction<ServerResponse>VerifyUserQuestion(VerifyUserQuestionUseCase updateQuestionCloneAnswerUseCase) {
 
-        return route(PUT("/modificarclonarquestion").and(accept(MediaType.APPLICATION_JSON)),
+        return route(PUT("/verificarpreguntaporid").and(accept(MediaType.APPLICATION_JSON)),
                 request -> request.bodyToMono(QuestionDTO.class)
                         .flatMap(questionDTO -> updateQuestionCloneAnswerUseCase.verificarUsuarioPregunta(questionDTO)
                                 .flatMap(result -> ServerResponse.ok()
                                         .contentType(MediaType.APPLICATION_JSON)
                                         .bodyValue(result)).onErrorResume(error ->{
                                             if(error instanceof IllegalAccessException){
-                                                return ServerResponse.badRequest().bodyValue(new QuestionDTO("user no es","pregunta", "tipo","categoria"));
+                                                return ServerResponse.badRequest().bodyValue(new ResponseDTO("usuario no coincide con el id de la pregunta",false));
                                             }
                                             return ServerResponse.badRequest().build();
                                 })));

@@ -23,7 +23,6 @@ public class AlertEditQuestionUseCase {
 
     @Autowired
     public AlertEditQuestionUseCase( AnswerRepository answerRepository, ResponseMapper responseMapper) {
-
         this.answerRepository = answerRepository;
         this.responseMapper = responseMapper;
     }

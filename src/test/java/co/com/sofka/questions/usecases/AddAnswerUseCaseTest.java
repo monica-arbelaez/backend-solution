@@ -5,6 +5,7 @@ import co.com.sofka.questions.model.AnswerDTO;
 import co.com.sofka.questions.reposioties.AnswerRepository;
 import co.com.sofka.questions.usecase.AddAnswerUseCase;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -26,6 +27,7 @@ class AddAnswerUseCaseTest {
 
 
     @Test
+    @DisplayName("consultar respuestas CRUD use case")
     public void setAddAnswerUseCaseTest(){
         var answerDTO = new  AnswerDTO("2", "11", "Medellin");
         var answer = new Answer();

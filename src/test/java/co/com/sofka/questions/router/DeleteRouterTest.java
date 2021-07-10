@@ -1,6 +1,7 @@
 package co.com.sofka.questions.router;
 
 import co.com.sofka.questions.usecase.DeleteUseCase;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
@@ -28,6 +29,7 @@ class DeleteRouterTest {
     private DeleteUseCase deleteUseCase;
 
     @Test
+    @DisplayName("eliminar pregunta CRUD router")
     public void eliminarQuestionRouterTest(){
         Mockito.when(deleteUseCase.deleteByquestionId("1")).thenReturn(Mono.empty());
 

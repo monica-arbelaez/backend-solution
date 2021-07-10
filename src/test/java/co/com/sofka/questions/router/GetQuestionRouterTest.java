@@ -4,6 +4,7 @@ import co.com.sofka.questions.model.QuestionDTO;
 import co.com.sofka.questions.reposioties.QuestionRepository;
 import co.com.sofka.questions.usecase.GetUseCase;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
@@ -28,6 +29,7 @@ class GetQuestionRouterTest {
     private WebTestClient webTestClient;
 
     @Test
+    @DisplayName("obtener pregunta CRUD router")
     public void obtenerQuestionTest(){
 
         var questionDTO = new QuestionDTO("12","1","que fue primero", "OPEN","xxx");
